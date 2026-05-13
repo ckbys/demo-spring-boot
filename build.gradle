@@ -49,7 +49,7 @@ tasks.named('test') {
 
 jooq {
 	version = '3.19.16'
-	edition = nu.studer.gradle.jooq.JooqEdition.OPEN_SOURCE
+	edition = nu.studer.gradle.jooq.JooqEdition.OSS
 
 	configurations {
 		main {
