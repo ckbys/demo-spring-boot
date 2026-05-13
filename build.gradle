@@ -28,7 +28,12 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	runtimeOnly 'org.postgresql:postgresql'
+	
+	// jOOQのジェネレーター用
 	jooqGenerator 'org.postgresql:postgresql'
+	jooqGenerator 'org.glassfish.jaxb:jaxb-runtime:4.0.5'
+	jooqGenerator 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-jooq-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -48,7 +53,7 @@ tasks.named('test') {
 }
 
 jooq {
-	version = '3.19.16'
+	version = '3.19.32'
 	edition = nu.studer.gradle.jooq.JooqEdition.OSS
 
 	configurations {
@@ -68,6 +73,7 @@ jooq {
 					database {
 						name = 'org.jooq.meta.postgres.PostgresDatabase'
 						inputSchema = 'public'
+						excludes = 'flyway_schema_history'
 					}
 					generate {
 						deprecated = false
